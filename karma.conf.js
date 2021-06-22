@@ -3,6 +3,12 @@
 
 module.exports = function (config) {
   config.set({
+    customLaunchers:{
+      ChromeHeadlessCI:{
+        base: 'ChromeHeadless',
+        flags: ['--no-sandb0x']
+      }
+    },
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
@@ -37,7 +43,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'ChromeHeadlessCI'],
     singleRun: false,
     restartOnFileChange: true
   });
