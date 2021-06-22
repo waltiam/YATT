@@ -1,16 +1,18 @@
-language: node_js
-node_js:
-  - "10"
+name: CI Angular app through Github Actions
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
 
-addons:
-  chrome: stable
+      - name: Setup
+        run: npm ci
 
-cache:
-  directories:
-    - ./node_modules
-
-install:
-  - npm install
-
-script:
-  - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+      - name: Test
+        run: |
+          npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
